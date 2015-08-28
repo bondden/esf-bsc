@@ -47,7 +47,7 @@ export class Bsc{
 					cfgPth=__dirname+'/'+cfgPth;
 				}
 
-				fs.readJson(path.resolve(cfgPth),function(e1,r1){
+				fs.readJson(path.resolve(cfgPth),function(e1,cfg){
 					if(e1){
 						rj(e1);
 						return e1;
