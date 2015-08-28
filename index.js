@@ -15,7 +15,7 @@ var fs = require('fs-extra'),
     path = require('path');
 
 /**
- *
+ * abstract class
  */
 
 var Bsc = (function () {
@@ -43,7 +43,7 @@ var Bsc = (function () {
 
 			return new Promise(function (rs, rj) {
 
-				fs.readJson(path.resolve(__dirname + '/.esfrc'), function (e, r) {
+				fs.readJson(path.resolve(__dirname + '../../.esfrc'), function (e, r) {
 					if (e) {
 						rj(e);
 						return e;

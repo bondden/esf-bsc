@@ -9,7 +9,7 @@ var
 ;
 
 /**
- *
+ * abstract class
  */
 export class Bsc{
 
@@ -32,7 +32,7 @@ export class Bsc{
 
 		return new Promise(function(rs,rj){
 
-			fs.readJson(path.resolve(__dirname+'/.esfrc'),function(e,r){
+			fs.readJson(path.resolve(__dirname+'../../.esfrc'),function(e,r){
 				if(e){
 					rj(e);
 					return e;
