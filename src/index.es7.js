@@ -32,15 +32,15 @@ export class Bsc{
 
 		return new Promise(function(rs,rj){
 
-			fs.readJson(path.resolve(__dirname+'../../.esfrc'),function(e,r){
+			fs.readJson(path.resolve(__dirname+'/../../../.esfrc'),function(e,r){
 				if(e){
 					rj(e);
 					return e;
 				}
 
 				let cfgPth='tst/d/esfapp.cfg.json';
-				if(r.cfgPth instanceof String){
-					cfgPth=r.cfgPth;
+				if(typeof r.cfgPth === 'string'){
+					cfgPth = r.cfgPth;
 				}
 
 				if(!path.isAbsolute(cfgPth)){
