@@ -75,13 +75,14 @@ var Bsc = (function () {
 		value: function reloadConfig() {
 			var pathToConfigFile = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
 
+			var H = this;
 			return new Promise(function (rs, rj) {
 
 				if (pathToConfigFile !== false) {
-					this.cfgPath = pathToConfigFile;
+					H.cfgPath = pathToConfigFile;
 				}
 
-				this.loadConfig().then(function (r) {
+				H.loadConfig().then(function (r) {
 					rs(r);
 				})['catch'](function (e) {
 					rj(e);
