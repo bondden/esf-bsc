@@ -65,13 +65,14 @@ export class Bsc{
 	}
 	
 	reloadConfig(pathToConfigFile=false){
+		var H=this;
 		return new Promise(function(rs,rj){
 			
 			if(pathToConfigFile!==false){
-				this.cfgPath=pathToConfigFile;	
+				H.cfgPath=pathToConfigFile;	
 			}			
 			
-			this.loadConfig().then(function(r){
+			H.loadConfig().then(function(r){
 				rs(r);
 			}).catch(function(e){
 				rj(e);
