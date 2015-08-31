@@ -54,8 +54,8 @@ var Bsc = (function () {
 						H.cfgPth = r.cfgPth;
 					}
 
-					if (!path.isAbsolute(cfgPth)) {
-						H.cfgPth = __dirname + '/' + cfgPth;
+					if (!path.isAbsolute(H.cfgPth)) {
+						H.cfgPth = __dirname + '/' + H.cfgPth;
 					}
 
 					fs.readJson(path.resolve(H.cfgPth), function (e1, cfg) {
