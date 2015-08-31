@@ -15,6 +15,7 @@ export class Bsc{
 
 	constructor(){
 		this.cfg=false;
+		this.cfgPath='tst/d/esfapp.cfg.json';
 	}
 
 	/**
@@ -37,17 +38,16 @@ export class Bsc{
 					rj(e);
 					return e;
 				}
-
-				let cfgPth='tst/d/esfapp.cfg.json';
+				
 				if(typeof r.cfgPth === 'string'){
-					cfgPth = r.cfgPth;
+					H.cfgPth = r.cfgPth;
 				}
 
 				if(!path.isAbsolute(cfgPth)){
-					cfgPth=__dirname+'/'+cfgPth;
+					H.cfgPth=__dirname+'/'+cfgPth;
 				}
 
-				fs.readJson(path.resolve(cfgPth),function(e1,cfg){
+				fs.readJson(path.resolve(H.cfgPth),function(e1,cfg){
 					if(e1){
 						rj(e1);
 						return e1;
@@ -62,6 +62,22 @@ export class Bsc{
 
 		});
 
+	}
+	
+	reloadConfig(pathToConfigFile=false){
+		return new Promise(function(rs,rj){
+			
+			if(pathToConfigFile!==false){
+				this.cfgPath=pathToConfigFile;	
+			}			
+			
+			this.loadConfig().then(function(r){
+				rs(r);
+			}).catch(function(e){
+				rj(e);
+			});
+			
+		});
 	}
 
 }

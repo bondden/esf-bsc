@@ -23,6 +23,7 @@ var Bsc = (function () {
 		_classCallCheck(this, Bsc);
 
 		this.cfg = false;
+		this.cfgPath = 'tst/d/esfapp.cfg.json';
 	}
 
 	/**
@@ -49,16 +50,15 @@ var Bsc = (function () {
 						return e;
 					}
 
-					var cfgPth = 'tst/d/esfapp.cfg.json';
 					if (typeof r.cfgPth === 'string') {
-						cfgPth = r.cfgPth;
+						H.cfgPth = r.cfgPth;
 					}
 
 					if (!path.isAbsolute(cfgPth)) {
-						cfgPth = __dirname + '/' + cfgPth;
+						H.cfgPth = __dirname + '/' + cfgPth;
 					}
 
-					fs.readJson(path.resolve(cfgPth), function (e1, cfg) {
+					fs.readJson(path.resolve(H.cfgPth), function (e1, cfg) {
 						if (e1) {
 							rj(e1);
 							return e1;
@@ -67,6 +67,24 @@ var Bsc = (function () {
 						H.cfg = cfg;
 						rs(H.cfg);
 					});
+				});
+			});
+		}
+	}, {
+		key: 'reloadConfig',
+		value: function reloadConfig() {
+			var pathToConfigFile = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+
+			return new Promise(function (rs, rj) {
+
+				if (pathToConfigFile !== false) {
+					this.cfgPath = pathToConfigFile;
+				}
+
+				this.loadConfig().then(function (r) {
+					rs(r);
+				})['catch'](function (e) {
+					rj(e);
 				});
 			});
 		}
