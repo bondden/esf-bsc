@@ -1,7 +1,7 @@
 {
   "name": "@bond007/esf-bsc",
-  "version": "0.2.4",
-  "description": "",
+  "version": "1.0.0",
+  "description": "ESF Basic class with loading/reloading configuration functionality",
   "main": "index.js",
   "scripts": {
     "test": "tst/main.js"
@@ -11,7 +11,8 @@
     "url": "https://bondden@bitbucket.org/bondden/esf-bsc.git"
   },
   "keywords": [
-    "esf"
+    "esf",
+    "basic"
   ],
   "author": "Denis Bondarenko <bond.den@gmail.com>",
   "license": "MIT",
@@ -37,11 +38,15 @@
     "mocha-lcov-reporter": "0.0.2"
   },
   "files": [
-    "index.js",
-    "gulpfile.js",
     ".jscsrc",
     ".editorconfig",
     ".gitattributes",
+    ".gitignore",
+    ".npmignore",
+    "index.js",
+    "gulpfile.js",
+    "LICENSE.md",
+    "README.md",
     "lib",
     "src",
     "tst"
