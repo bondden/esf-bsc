@@ -15,7 +15,7 @@ export class Bsc{
 
 	constructor(){
 		this.cfg=false;
-		this.cfgPath='tst/d/esfapp.cfg.json';
+		this.cfgPth='tst/d/esfapp.cfg.json';
 	}
 
 	/**
@@ -69,7 +69,7 @@ export class Bsc{
 		return new Promise(function(rs,rj){
 			
 			if(pathToConfigFile!==false){
-				H.cfgPath=pathToConfigFile;	
+				H.cfgPth=pathToConfigFile;	
 			}			
 			
 			H.loadConfig().then(function(r){
