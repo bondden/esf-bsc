@@ -15,9 +15,15 @@
 	"requireBlocksOnNewline":true,
 	"requireCamelCaseOrUpperCaseIdentifiers": true,
 	"requireCapitalizedConstructors": true,
-	"validateIndentation": "\t",
-	"disallowMixedSpacesAndTabs": "smart",
-	"requireCurlyBraces": true,
+	"validateIndentation":2,
+	"disallowMixedSpacesAndTabs":true,
+	"requireCurlyBraces": [
+		"for",
+		"while",
+		"do",
+		"try",
+		"catch"
+	],
 	"requireAlignedObjectValues": "all",
 	"requireSemicolons": true,
 	"validateLineBreaks": "LF",

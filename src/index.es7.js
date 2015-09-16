@@ -4,8 +4,17 @@
 "use strict";
 
 var
-	fs=require('fs-extra'),
-	path=require('path')
+  fs       =require('fs-extra'),
+  path     =require('path'),
+  parentSrc=require('parent-search')
+;
+
+import * as modUtl from '@bond007/esf-utl';
+
+var
+  U=modUtl.Utl,
+  L=U.log,
+  E=U.rejectingError
 ;
 
 /**
@@ -14,7 +23,7 @@ var
 export class Bsc{
 
 	constructor(){
-		this.cfg=false;
+		this.cfg=null;
 		this.cfgPth='tst/d/esfapp.cfg.json';
 	}
 
@@ -26,58 +35,80 @@ export class Bsc{
 
 		var H=this;
 		if(H.cfg){
-			return new Promise(function(rs,rj){
+			return new Promise((rs,rj)=>{
+        L('Bsc: Using preset cfg: '+JSON.stringify(H.cfg,null,'\t'));
 				rs(H.cfg);
 			});
 		}
 
-		return new Promise(function(rs,rj){
+		return new Promise((rs,rj)=>{
 
-			fs.readJson(path.resolve(__dirname+'/../../../.esfrc'),function(e,r){
-				if(e){
-					rj(e);
-					return e;
-				}
-				
-				if(typeof r.cfgPth === 'string'){
-					H.cfgPth = r.cfgPth;
-				}
+      L('Searching .esfrc starting from : `'+__dirname+'`...');
 
-				if(!path.isAbsolute(H.cfgPth)){
-					H.cfgPth=__dirname+'/'+H.cfgPth;
-				}
+      parentSrc(__dirname,'.esfrc',{},(e0,d0)=>{
 
-				fs.readJson(path.resolve(H.cfgPth),function(e1,cfg){
-					if(e1){
-						rj(e1);
-						return e1;
-					}
+        if(e0){
+          return E(3,'.esfrc search error',e0,rj);
+        }
 
-					H.cfg=cfg;
-					rs(H.cfg);
+        if(!d0){
+          let msg='.esfrc not found';
+          return E(3,msg,new Error(msg),rj);
+        }
 
-				});
+        L('.esfrc found at : '+d0);
 
-			});
+        let esfrcPath=path.resolve(d0);
+        L('Getting cfgPth from : `'+esfrcPath+'`...');
+        fs.readJson(esfrcPath,(e,r)=>{
+
+          if(e){
+            return E(1,'.esfrc reading error',e,rj);
+          }
+
+          if(typeof r.cfgPth === 'string'){
+            H.cfgPth = r.cfgPth;
+          }
+
+          if(!path.isAbsolute(H.cfgPth)){
+            H.cfgPth=__dirname+'/'+H.cfgPth;
+          }
+
+          L('Using cfgPath: '+H.cfgPth);
+
+          fs.readJson(path.resolve(H.cfgPth),(e1,cfg)=>{
+
+            if(e1){
+              return E(2,'Error reading '+H.cfgPth,e1,rj);
+            }
+
+            H.cfg=cfg;
+            rs(H.cfg);
+
+          });
+
+        });
+
+      });
 
 		});
 
 	}
-	
-	reloadConfig(pathToConfigFile=false){
+
+	reloadConfig(pathToConfigFile=null){
 		var H=this;
-		return new Promise(function(rs,rj){
-			
-			if(pathToConfigFile!==false){
-				H.cfgPth=pathToConfigFile;	
-			}			
-			
-			H.loadConfig().then(function(r){
+		return new Promise((rs,rj)=>{
+
+			if(pathToConfigFile){
+				H.cfgPth=pathToConfigFile;
+			}
+
+			H.loadConfig().then((r)=>{
 				rs(r);
-			}).catch(function(e){
-				rj(e);
+			}).catch((e)=>{
+        return E(3,'Error reloading config from: '+H.cfgPth,e,rj);
 			});
-			
+
 		});
 	}
 
