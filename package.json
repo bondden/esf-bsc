@@ -1,6 +1,6 @@
 {
   "name": "@bond007/esf-bsc",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "ESF Basic class with loading/reloading configuration functionality",
   "main": "index.js",
   "scripts": {
