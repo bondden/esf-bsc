@@ -8,6 +8,7 @@ var
 	assert   = require('chai').assert,
 	clc 		 = require('cli-color'),
 	path	 	 = require('path'),
+  semver   = require('semver'),
 
 	App      =require('../index.js').Bsc
 ;
@@ -21,6 +22,7 @@ suite('Bsc Suit',function(){
     try{
       app= new App();
       assert.isObject(app,'app should be an object');
+      done();
     }catch(e){
       done(e);
     }
@@ -30,10 +32,10 @@ suite('Bsc Suit',function(){
   test('loadConfig()',(done)=>{
 
     app.loadConfig().then((r)=>{
-      assert.isObject(r,'result should be an object');
       assert.isObject(app.cfg,'cfg should be an object');
       assert.property(app.cfg,'schemaVersion','cfg should have a schemaVersion');
-      //todo: check schema version for SemVer compliance.
+      assert.isNotNull(semver.valid(app.cfg.schemaVersion),'schemaVersion should be valid SemVer');
+      done();
     }).catch((e)=>{
       done(e);
     });

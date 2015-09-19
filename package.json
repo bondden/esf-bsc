@@ -4,7 +4,7 @@
   "description": "ESF Basic class with loading/reloading configuration functionality",
   "main": "index.js",
   "scripts": {
-    "test": "tst/main.js"
+    "test": "tst/index.js"
   },
   "repository": {
     "type": "git",
@@ -12,7 +12,9 @@
   },
   "keywords": [
     "esf",
-    "basic"
+    "bsc",
+    "basic",
+    "config"
   ],
   "author": "Denis Bondarenko <bond.den@gmail.com>",
   "license": "MIT",
@@ -39,7 +41,8 @@
     "istanbul": "^0.3.20",
     "jscs": "^2.1.1",
     "mocha": "^2.3.2",
-    "mocha-lcov-reporter": "0.0.2"
+    "mocha-lcov-reporter": "0.0.2",
+    "semver": "^5.0.3"
   },
   "files": [
     ".jscsrc",
@@ -47,6 +50,7 @@
     ".gitattributes",
     ".gitignore",
     ".npmignore",
+    ".esfrc",
     "index.js",
     "gulpfile.js",
     "LICENSE.md",
