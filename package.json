@@ -1,6 +1,6 @@
 {
-  "name": "@bond007/esf-bsc",
-  "version": "1.1.0",
+  "name": "esf-bsc",
+  "version": "1.1.1",
   "description": "ESF Basic class with loading/reloading configuration functionality",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://bondden@bitbucket.org/bondden/esf-bsc.git"
+    "url": "https://github.com/bondden/esf-bsc.git"
   },
   "keywords": [
     "esf",
@@ -18,9 +18,9 @@
   ],
   "author": "Denis Bondarenko <bond.den@gmail.com>",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/bondden/esf-bsc#readme",
+  "homepage": "https://github.com/bondden/esf-bsc/blob/master/README.md",
   "dependencies": {
-    "@bond007/esf-utl": "^0.5.8",
+    "esf-utl": "^0.5.8",
     "fs-extra": "^0.24.0",
     "parent-search": "^1.1.0"
   },
