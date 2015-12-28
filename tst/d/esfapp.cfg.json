@@ -1,0 +1,20 @@
+{
+  "schemaVersion":"0.1.0",
+  "schemaChangeLog":[
+  ],
+  "measure":{
+    "time":"ms"
+  },
+  "description":{
+    "schemaVersion":"Mandatory field because of its role in checking the esfapp.cfg.json for consistency by .esfrc and tests. Format: SemVer",
+    "pth":{
+    }
+  },
+  "mode":"tst",
+  "modes":{
+    "tst":{
+    },
+    "prd":{
+    }
+  }
+}

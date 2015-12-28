@@ -2,16 +2,13 @@
  * Created by Denis Bondarenko <bond.den@gmail.com> on 29.06.2015.
  */
 'use strict';
-require('babel/polyfill');
 
 var
-	assert   = require('chai').assert,
-	clc 		 = require('cli-color'),
-	path	 	 = require('path'),
-  semver   = require('semver'),
+  assert=require('chai').assert,
+  semver=require('semver'),
 
-	App      =require('../index.js').Bsc
-;
+  App   =require('../index.js').Bsc
+  ;
 
 var app;
 
@@ -20,7 +17,7 @@ suite('Bsc Suit',function(){
   test('new Bsc()',(done)=>{
 
     try{
-      app= new App();
+      app=new App();
       assert.isObject(app,'app should be an object');
       done();
     }catch(e){

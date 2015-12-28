@@ -9,7 +9,7 @@ var
   parentSrc=require('parent-search')
 ;
 
-import * as modUtl from '@bond007/esf-utl';
+import * as modUtl from 'esf-utl';
 
 var
   U=modUtl.Utl,
