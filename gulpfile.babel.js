@@ -5,7 +5,6 @@
 
 var
   gulp   =require('gulp'),
-  util   =require('gulp-util'),
   changed=require('gulp-changed'),
   rename =require('gulp-rename'),
   srcmaps=require('gulp-sourcemaps'),

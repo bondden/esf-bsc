@@ -1,6 +1,6 @@
 {
   "name": "esf-bsc",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "ESF Basic class with loading/reloading configuration functionality",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
   "license": "MIT",
   "homepage": "https://github.com/bondden/esf-bsc/blob/master/README.md",
   "dependencies": {
-    "esf-utl": "^2.1.0",
+    "esf-utl": "^2.1.2",
     "fs-extra": "^0.26.3",
     "parent-search": "^1.3.0"
   },
@@ -41,21 +41,20 @@
     "gulp-plumber": "^1.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sourcemaps": "^1.6.0",
-    "gulp-util": "^3.0.7",
     "istanbul": "^0.4.1",
     "mocha": "^2.3.4",
     "mocha-lcov-reporter": "^1.0.0",
     "semver": "^5.1.0"
   },
   "files": [
+    ".esfrc",
     ".eslintrc",
     ".editorconfig",
     ".gitattributes",
     ".gitignore",
     ".npmignore",
-    ".esfrc",
     "index.js",
-    "gulpfile.js",
+    "gulpfile.babel.js",
     "LICENSE.md",
     "README.md",
     "lib",
