@@ -1,6 +1,6 @@
 {
   "name": "esf-bsc",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "ESF Basic class with loading/reloading configuration functionality",
   "main": "index.js",
   "scripts": {

@@ -6,13 +6,39 @@
 var
   assert=require('chai').assert,
   semver=require('semver'),
+  fs=require('fs-extra'),
+  path=require('path'),
 
   App   =require('../index.js').Bsc
   ;
 
 var app;
+var esfrc={
+  bdl:path.resolve(__dirname+'/../.esfrc.tst'),
+  tst:path.resolve(__dirname+'/../.esfrc')
+};
 
 suite('Bsc Suit',function(){
+
+  suiteSetup(done=>{
+    fs.move(esfrc.bdl,esfrc.tst,e=>{
+      if(e){
+        done(e);
+      }else{
+        done();
+      }
+    });
+  });
+
+  suiteTeardown(done=>{
+    fs.move(esfrc.tst,esfrc.bdl,e=>{
+      if(e){
+        done(e);
+      }else{
+        done();
+      }
+    });
+  });
 
   test('new Bsc()',(done)=>{
 
