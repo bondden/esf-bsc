@@ -7,7 +7,7 @@ var
   fs       =require('fs-extra'),
   path     =require('path'),
   parentSrc=require('parent-search')
-;
+  ;
 
 import * as modUtl from 'esf-utl';
 
@@ -15,50 +15,50 @@ var
   U=modUtl.Utl,
   L=U.log,
   E=U.rejectingError
-;
+  ;
 
 /**
  * abstract class
  */
-export class Bsc{
+export class Bsc {
 
-	constructor(){
-		this.cfg=null;
-		this.cfgPth='tst/d/esfapp.cfg.json';
-	}
+  constructor(){
+    this.cfg   =null;
+    this.cfgPth='tst/d/esfapp.cfg.json';
+  }
 
-	/**
-	 * [[Description]]
-	 * @returns {Promise} [[Description]]
-	 */
-	loadConfig(){
+  /**
+   * [[Description]]
+   * @returns {Promise} [[Description]]
+   */
+  loadConfig(){
 
-		var H=this;
-		if(H.cfg){
-			return new Promise((rs,rj)=>{
+    var H=this;
+    if(H.cfg){
+      return new Promise((rs,rj)=>{
         L('Bsc: Using preset cfg: '+JSON.stringify(H.cfg,null,'\t'));
-				rs(H.cfg);
-			});
-		}
+        rs(H.cfg);
+      });
+    }
 
-		return new Promise((rs,rj)=>{
+    return new Promise((rs,rj)=>{
 
       L('Searching .esfrc starting from : `'+__dirname+'`...');
 
-      parentSrc(__dirname,'.esfrc',{},(e0,d0)=>{
+      parentSrc(__dirname,'.esfrc',{},(e0,esfrcPth)=>{
 
         if(e0){
           return E(3,'.esfrc search error',e0,rj);
         }
 
-        if(!d0){
+        if(!esfrcPth){
           let msg='.esfrc not found';
           return E(3,msg,new Error(msg),rj);
         }
 
-        L('.esfrc found at : '+d0);
+        L('.esfrc found at : '+esfrcPth);
 
-        let esfrcPath=path.resolve(d0);
+        let esfrcPath=path.resolve(esfrcPth);
         L('Getting cfgPth from : `'+esfrcPath+'`...');
         fs.readJson(esfrcPath,(e,r)=>{
 
@@ -66,12 +66,12 @@ export class Bsc{
             return E(1,'.esfrc reading error',e,rj);
           }
 
-          if(typeof r.cfgPth === 'string'){
-            H.cfgPth = r.cfgPth;
+          if(typeof r.cfgPth==='string'){
+            H.cfgPth=r.cfgPth;
           }
 
           if(!path.isAbsolute(H.cfgPth)){
-            H.cfgPth=__dirname+'/'+H.cfgPth;
+            H.cfgPth=path.resolve(path.dirname(esfrcPth)+'/'+H.cfgPth);
           }
 
           L('Using cfgPath: '+H.cfgPth);
@@ -91,25 +91,25 @@ export class Bsc{
 
       });
 
-		});
+    });
 
-	}
+  }
 
-	reloadConfig(pathToConfigFile=null){
-		var H=this;
-		return new Promise((rs,rj)=>{
+  reloadConfig(pathToConfigFile=null){
+    var H=this;
+    return new Promise((rs,rj)=>{
 
-			if(pathToConfigFile){
-				H.cfgPth=pathToConfigFile;
-			}
+      if(pathToConfigFile){
+        H.cfgPth=pathToConfigFile;
+      }
 
-			H.loadConfig().then((r)=>{
-				rs(r);
-			}).catch((e)=>{
+      H.loadConfig().then((r)=>{
+        rs(r);
+      }).catch((e)=>{
         return E(3,'Error reloading config from: '+H.cfgPth,e,rj);
-			});
+      });
 
-		});
-	}
+    });
+  }
 
 }

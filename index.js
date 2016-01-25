@@ -50,20 +50,20 @@ class Bsc {
 
       L('Searching .esfrc starting from : `' + __dirname + '`...');
 
-      parentSrc(__dirname, '.esfrc', {}, (e0, d0) => {
+      parentSrc(__dirname, '.esfrc', {}, (e0, esfrcPth) => {
 
         if (e0) {
           return E(3, '.esfrc search error', e0, rj);
         }
 
-        if (!d0) {
+        if (!esfrcPth) {
           let msg = '.esfrc not found';
           return E(3, msg, new Error(msg), rj);
         }
 
-        L('.esfrc found at : ' + d0);
+        L('.esfrc found at : ' + esfrcPth);
 
-        let esfrcPath = path.resolve(d0);
+        let esfrcPath = path.resolve(esfrcPth);
         L('Getting cfgPth from : `' + esfrcPath + '`...');
         fs.readJson(esfrcPath, (e, r) => {
 
@@ -76,7 +76,7 @@ class Bsc {
           }
 
           if (!path.isAbsolute(H.cfgPth)) {
-            H.cfgPth = __dirname + '/' + H.cfgPth;
+            H.cfgPth = path.resolve(path.dirname(esfrcPth) + '/' + H.cfgPth);
           }
 
           L('Using cfgPath: ' + H.cfgPth);
