@@ -40,6 +40,17 @@ suite('Bsc Suit',function(){
     });
   });
 
+  setup(done=>{
+
+    try{
+      app=new App();
+      done();
+    }catch(e){
+      done(e);
+    }
+
+  });
+
   test('new Bsc()',done=>{
 
     try{
@@ -54,7 +65,8 @@ suite('Bsc Suit',function(){
 
   test('loadConfig()',done=>{
 
-    app.loadConfig()
+    app
+      .loadConfig()
        .then(r=>{
          assert.isObject(app.cfg,'cfg should be an object');
          assert.property(app.cfg,'schemaVersion','cfg should have a schemaVersion');
@@ -64,6 +76,84 @@ suite('Bsc Suit',function(){
        .catch(e=>{
          done(e);
        })
+    ;
+
+  });
+
+  test('loadConfig(cfgObj)',done=>{
+
+    const cfgObj={
+      schemaVersion:'0.1.1',
+      dat:{
+        a:'foo',
+        b:2
+      }
+    };
+    app
+      .loadConfig(cfgObj)
+       .then(r=>{
+         
+         console.log(app.cfg);
+         
+         assert.isObject(app.cfg,'cfg should be an object');
+         assert.property(app.cfg,'schemaVersion','cfg should have a schemaVersion');
+         assert.isNotNull(semver.valid(app.cfg.schemaVersion),'schemaVersion should be valid SemVer');
+         assert.isObject(app.cfg.dat,'cfg should have an object attribute dat');
+         done();
+       })
+       .catch(e=>{
+         done(e);
+       })
+    ;
+
+  });
+
+  test('reloadConfig()',done=>{
+    
+    app
+      .reloadConfig()
+      .then(r=>{
+
+        console.log(app.cfg);
+
+        assert.isObject(app.cfg,'cfg should be an object');
+        assert.property(app.cfg,'schemaVersion','cfg should have a schemaVersion');
+        assert.isNotNull(semver.valid(app.cfg.schemaVersion),'schemaVersion should be valid SemVer');
+        assert.equal(app.cfg.schemaVersion,'0.1.0','schemaVersion should be equal to "0.1.0"');
+        done();
+      })
+      .catch(e=>{
+        done(e);
+      })
+    ;
+
+  });
+
+  test('reloadConfig(cfgObj)',done=>{
+
+    const cfgObj={
+      schemaVersion:'0.1.1',
+      dat:{
+        a:'foo',
+        b:2
+      }
+    };
+    app
+      .reloadConfig(cfgObj)
+      .then(r=>{
+
+        console.log(app.cfg);
+
+        assert.isObject(app.cfg,'cfg should be an object');
+        assert.property(app.cfg,'schemaVersion','cfg should have a schemaVersion');
+        assert.isNotNull(semver.valid(app.cfg.schemaVersion),'schemaVersion should be valid SemVer');
+        assert.isObject(app.cfg.dat,'cfg should have an object attribute dat');
+        assert.equal(app.cfg.dat.a,'foo','cfg should have a sub-attribute dat.a, equal to "foo"');
+        done();
+      })
+      .catch(e=>{
+        done(e);
+      })
     ;
 
   });

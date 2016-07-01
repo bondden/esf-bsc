@@ -31,7 +31,7 @@ var d={
   }
 };
 
-gulp.task('bld',function(){
+gulp.task('bld',()=>{
   return gulp
     .src(d.js.src)
     .pipe(plumber())
