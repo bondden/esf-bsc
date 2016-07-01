@@ -95,9 +95,7 @@ class Bsc {
     });
   }
 
-  reloadConfig() {
-    let pathToConfigFile = arguments.length <= 0 || arguments[0] === undefined ? null : arguments[0];
-
+  reloadConfig(pathToConfigFile = null) {
     var H = this;
     return new Promise((rs, rj) => {
 

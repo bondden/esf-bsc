@@ -103,11 +103,14 @@ export class Bsc {
         H.cfgPth=pathToConfigFile;
       }
 
-      H.loadConfig().then((r)=>{
-        rs(r);
-      }).catch((e)=>{
-        return E(3,'Error reloading config from: '+H.cfgPth,e,rj);
-      });
+      H.loadConfig()
+       .then(r=>{
+         rs(r);
+       })
+       .catch(e=>{
+         return E(3,'Error reloading config from: '+H.cfgPth,e,rj);
+       })
+      ;
 
     });
   }

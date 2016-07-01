@@ -45,31 +45,35 @@ gulp.task('bld',function(){
     .pipe(gulp.dest(d.js.dst));
 });
 
-gulp.task('tst',['bld'],function(){
-  return gulp
-    .src(d.tst.main,{read:false})
-    .pipe(mocha({
-                  reporter:'spec',
-                  ui:      'tdd'
-                }))
-    .once('error',function(e){
-      E(e);
-      process.exit(1);
-    })
-    .once('end',function(){
-      process.exit();
-    });
+gulp.task('tst',
+  [
+    'bld'
+  ],
+  ()=>{
+    return gulp
+      .src(d.tst.main,{read:false})
+      .pipe(mocha({
+        reporter:'spec',
+        ui:      'tdd'
+      }))
+      .once('error',e=>{
+        E(e);
+        process.exit(1);
+      })
+      .once('end',()=>{
+        process.exit();
+      });
+  });
+
+gulp.task('debug',['bld'],()=>{
+
 });
 
-gulp.task('debug',['bld'],function(){
-
-});
-
-gulp.task('watch',function(){
+gulp.task('watch',()=>{
   gulp.watch(d.js.src,['bld']);
 });
 
-gulp.task('bump',function(){
+gulp.task('bump',()=>{
   gulp
     .src('./package.json')
     .pipe(bump({type:'patch'}))
