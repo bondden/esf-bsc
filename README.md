@@ -1,4 +1,7 @@
 # ESF-Basic
+
+[![Build Status](https://travis-ci.org/bondden/esf-bsc.svg?branch=master)](https://travis-ci.org/bondden/esf-bsc.svg?branch=master)
+
 ## Road map
 
 | Version | Functionality                                                                 | API Change                   | Status   |
